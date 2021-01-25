@@ -1,0 +1,43 @@
+*{
+    direction: rtl ;
+    text-align: right;
+    font-family: 'Tajawal', sans-serif;
+}
+body{
+}
+
+main {padding-bottom: 200px;}
+.dark{ background-color: #122333; }
+.dark .table{color:#fff; box-shadow: 0 3px 20px #000c0d;}
+.dark .table-striped tbody tr:nth-of-type(odd) {background-color: #a39f9b1a;}
+.dark .table td, .table th{border-top: none;}
+.dark .table thead th {border-bottom: none;}
+#overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.bg-mood{
+    background-image: url('raphael-lovaski-pxax5WuM7eY-unsplash.jpg'); 
+    background-position: center;
+    background-size: cover;
+    padding: 93px;
+}
+
+.btn-orange , .bg-orange { background-color: #fd7e14; color: #fff;}
+.text-orange { color:#fd7e14 ;}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fd7e141a;
+}
+.alert-orange {
+    color: #a35617;
+    background-color: #fd7e143d;
+    border-color: var(--orange);
+}
+.table { color: #713d11 ; box-shadow: 0 3px 20px #ccc;}
+
+

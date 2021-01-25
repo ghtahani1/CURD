@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>CRUD VUE </title>
+    <!-- CSS only -->
+<!--  -->
+<script src="https://kit.fontawesome.com/dc2e591b8d.js" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+    <div id="app">
+      <div>
+      <select v-model="column">
+        <option :value="null">No Column Filter</option>
+        <option v-for="col in cols" :key="col">{{ col }}</option>
+      </select>
+      <input type="text" v-model="search" placeholder="Search">
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th v-for="col in cols" :key="col">{{ col }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="row in rows" :key="row.id">
+            <td v-for="col in cols" :key="col">{{ row[col] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+<script>
+    new Vue({
+        el: '#app',
+        data: () => ({
+          search: null,
+          column: null,
+          items: []
+        }),
+        beforeMount () {
+          this.items = Array.from(Array(20), (x,i) => {
+            return {
+              id: i,
+              name: Math.random().toString(36).substring(7),
+              title: Math.random().toString(36).substring(7),
+              description: Math.random().toString(36).substring(7)
+            }
+          })
+        },
+        computed: {
+          cols () {
+            return this.items.length >= 1 ? Object.keys(this.items[0]) : []
+          },
+          rows () {
+            if (!this.items.length) {
+              return []
+            }
+            
+            return this.items.filter(item => {
+              let props = (this.search && this.column) ? [item[this.column]] : Object.values(item)
+              
+              
+              return props.some(prop => !this.search || ((typeof prop === 'string') ? prop.includes(this.search) : prop.toString(10).includes(this.search)))
+            })
+          }
+        }
+      })
+</script>
+
+</body>
+</html>
